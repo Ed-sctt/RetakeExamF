@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+
+
+<title>Maze App</title>
+
+<script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
+// be compatible with the behavior of Pandoc < 2.8).
+document.addEventListener('DOMContentLoaded', function(e) {
+  var hs = document.querySelectorAll("div.section[class*='level'] > :first-child");
+  var i, h, a;
+  for (i = 0; i < hs.length; i++) {
+    h = hs[i];
+    if (!/^h[1-6]$/i.test(h.tagName)) continue;  // it should be a header h1-h6
+    a = h.attributes;
+    while (a.length > 0) h.removeAttribute(a[0].name);
+  }
+});
+</script>
+
+<style type="text/css">
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+span.underline{text-decoration: underline;}
+div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+</style>
+
+
+
+<style type="text/css">
+code {
+white-space: pre;
+}
+.sourceCode {
+overflow: visible;
+}
+</style>
+<style type="text/css" data-origin="pandoc">
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+{ counter-reset: source-line 0; }
+pre.numberSource code > span
+{ position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+{ content: counter(source-line);
+position: relative; left: -1em; text-align: right; vertical-align: baseline;
+border: none; display: inline-block;
+-webkit-touch-callout: none; -webkit-user-select: none;
+-khtml-user-select: none; -moz-user-select: none;
+-ms-user-select: none; user-select: none;
+padding: 0 4px; width: 4em;
+color: #aaaaaa;
+}
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa; padding-left: 4px; }
+div.sourceCode
+{ }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } 
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.at { color: #7d9029; } 
+code span.bn { color: #40a070; } 
+code span.bu { color: #008000; } 
+code span.cf { color: #007020; font-weight: bold; } 
+code span.ch { color: #4070a0; } 
+code span.cn { color: #880000; } 
+code span.co { color: #60a0b0; font-style: italic; } 
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.do { color: #ba2121; font-style: italic; } 
+code span.dt { color: #902000; } 
+code span.dv { color: #40a070; } 
+code span.er { color: #ff0000; font-weight: bold; } 
+code span.ex { } 
+code span.fl { color: #40a070; } 
+code span.fu { color: #06287e; } 
+code span.im { color: #008000; font-weight: bold; } 
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } 
+code span.kw { color: #007020; font-weight: bold; } 
+code span.op { color: #666666; } 
+code span.ot { color: #007020; } 
+code span.pp { color: #bc7a00; } 
+code span.sc { color: #4070a0; } 
+code span.ss { color: #bb6688; } 
+code span.st { color: #4070a0; } 
+code span.va { color: #19177c; } 
+code span.vs { color: #4070a0; } 
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } 
+</style>
+<script>
+// apply pandoc div.sourceCode style to pre.sourceCode instead
+(function() {
+  var sheets = document.styleSheets;
+  for (var i = 0; i < sheets.length; i++) {
+    if (sheets[i].ownerNode.dataset["origin"] !== "pandoc") continue;
+    try { var rules = sheets[i].cssRules; } catch (e) { continue; }
+    var j = 0;
+    while (j < rules.length) {
+      var rule = rules[j];
+      // check if there is a div.sourceCode rule
+      if (rule.type !== rule.STYLE_RULE || rule.selectorText !== "div.sourceCode") {
+        j++;
+        continue;
+      }
+      var style = rule.style.cssText;
+      // check if color or background-color is set
+      if (rule.style.color === '' && rule.style.backgroundColor === '') {
+        j++;
+        continue;
+      }
+      // replace div.sourceCode by a pre.sourceCode rule
+      sheets[i].deleteRule(j);
+      sheets[i].insertRule('pre.sourceCode{' + style + '}', j);
+    }
+  }
+})();
+</script>
+
+
+
+
+<style type="text/css">body {
+background-color: #fff;
+margin: 1em auto;
+max-width: 700px;
+overflow: visible;
+padding-left: 2em;
+padding-right: 2em;
+font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
+font-size: 14px;
+line-height: 1.35;
+}
+#TOC {
+clear: both;
+margin: 0 0 10px 10px;
+padding: 4px;
+width: 400px;
+border: 1px solid #CCCCCC;
+border-radius: 5px;
+background-color: #f6f6f6;
+font-size: 13px;
+line-height: 1.3;
+}
+#TOC .toctitle {
+font-weight: bold;
+font-size: 15px;
+margin-left: 5px;
+}
+#TOC ul {
+padding-left: 40px;
+margin-left: -1.5em;
+margin-top: 5px;
+margin-bottom: 5px;
+}
+#TOC ul ul {
+margin-left: -2em;
+}
+#TOC li {
+line-height: 16px;
+}
+table {
+margin: 1em auto;
+border-width: 1px;
+border-color: #DDDDDD;
+border-style: outset;
+border-collapse: collapse;
+}
+table th {
+border-width: 2px;
+padding: 5px;
+border-style: inset;
+}
+table td {
+border-width: 1px;
+border-style: inset;
+line-height: 18px;
+padding: 5px 5px;
+}
+table, table th, table td {
+border-left-style: none;
+border-right-style: none;
+}
+table thead, table tr.even {
+background-color: #f7f7f7;
+}
+p {
+margin: 0.5em 0;
+}
+blockquote {
+background-color: #f6f6f6;
+padding: 0.25em 0.75em;
+}
+hr {
+border-style: solid;
+border: none;
+border-top: 1px solid #777;
+margin: 28px 0;
+}
+dl {
+margin-left: 0;
+}
+dl dd {
+margin-bottom: 13px;
+margin-left: 13px;
+}
+dl dt {
+font-weight: bold;
+}
+ul {
+margin-top: 0;
+}
+ul li {
+list-style: circle outside;
+}
+ul ul {
+margin-bottom: 0;
+}
+pre, code {
+background-color: #f7f7f7;
+border-radius: 3px;
+color: #333;
+white-space: pre-wrap; 
+}
+pre {
+border-radius: 3px;
+margin: 5px 0px 10px 0px;
+padding: 10px;
+}
+pre:not([class]) {
+background-color: #f7f7f7;
+}
+code {
+font-family: Consolas, Monaco, 'Courier New', monospace;
+font-size: 85%;
+}
+p > code, li > code {
+padding: 2px 0px;
+}
+div.figure {
+text-align: center;
+}
+img {
+background-color: #FFFFFF;
+padding: 2px;
+border: 1px solid #DDDDDD;
+border-radius: 3px;
+border: 1px solid #CCCCCC;
+margin: 0 5px;
+}
+h1 {
+margin-top: 0;
+font-size: 35px;
+line-height: 40px;
+}
+h2 {
+border-bottom: 4px solid #f7f7f7;
+padding-top: 10px;
+padding-bottom: 2px;
+font-size: 145%;
+}
+h3 {
+border-bottom: 2px solid #f7f7f7;
+padding-top: 10px;
+font-size: 120%;
+}
+h4 {
+border-bottom: 1px solid #f7f7f7;
+margin-left: 8px;
+font-size: 105%;
+}
+h5, h6 {
+border-bottom: 1px solid #ccc;
+font-size: 105%;
+}
+a {
+color: #0033dd;
+text-decoration: none;
+}
+a:hover {
+color: #6666ff; }
+a:visited {
+color: #800080; }
+a:visited:hover {
+color: #BB00BB; }
+a[href^="http:"] {
+text-decoration: underline; }
+a[href^="https:"] {
+text-decoration: underline; }
+
+code > span.kw { color: #555; font-weight: bold; } 
+code > span.dt { color: #902000; } 
+code > span.dv { color: #40a070; } 
+code > span.bn { color: #d14; } 
+code > span.fl { color: #d14; } 
+code > span.ch { color: #d14; } 
+code > span.st { color: #d14; } 
+code > span.co { color: #888888; font-style: italic; } 
+code > span.ot { color: #007020; } 
+code > span.al { color: #ff0000; font-weight: bold; } 
+code > span.fu { color: #900; font-weight: bold; } 
+code > span.er { color: #a61717; background-color: #e3d2d2; } 
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+<h1 class="title toc-ignore">Maze App</h1>
+
+
+
+<p>This is the README.md where you can find all the necessary
+documentation and resources related to package.</p>
+<div id="installation" class="section level2">
+<h2>Installation</h2>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co">#devtools::install_github(&quot;ptds2022/groupf/RetakeExamF&quot;) # to edit</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a><span class="fu">library</span>(RetakeExamF)  <span class="co">#call the package</span></span></code></pre></div>
+</div>
+<div id="description" class="section level2">
+<h2>Description</h2>
+<p>RetakeExamF is a dynamic R package that empowers users to craft
+captivating mazes using the Depth-First Search (DFS) algorithm.
+Seamlessly merging educational insights and creative possibilities, this
+package provides a user-friendly platform to generate mazes of varying
+complexities.</p>
+<p>By integrating the “igraph” package, the creation of networks
+composed of edges and vertices, improve the flexibility and
+customization of maze designs. “ggplot2” package further elevates the
+maze-building experience by enabling users to visualize their mazes with
+aesthetically pleasing layouts.</p>
+</div>
+<div id="steps-to-follow-to-get-a-maze" class="section level2">
+<h2>Steps to follow to get a maze</h2>
+<div id="make-a-graph" class="section level3">
+<h3>1) Make a graph</h3>
+<p>Define the number of rows and cols to give a dimension to the graph
+and assign it name.</p>
+</div>
+<div id="use-dfs-method" class="section level3">
+<h3>2) Use DFS method</h3>
+<p>Add your name_graph in the function that create the maze with
+DFS.</p>
+</div>
+<div id="plot-the-graph" class="section level3">
+<h3>3) Plot the graph</h3>
+<p>Plot your name_graph.</p>
+<p>You can have a glimpse of the final output that the package offers
+:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a></span>
+<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>Example_maze <span class="ot">&lt;-</span> RetakeExamF<span class="sc">::</span><span class="fu">myGraph</span> (<span class="at">nrows =</span> <span class="dv">10</span>,<span class="at">ncols =</span> <span class="dv">10</span>) </span>
+<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>Example_maze <span class="ot">&lt;-</span> RetakeExamF<span class="sc">::</span><span class="fu">dfs_method</span> (<span class="at">GraphMade =</span> Example_maze)</span>
+<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>RetakeExamF<span class="sc">::</span><span class="fu">plotmyMaze</span>(Example_maze,<span class="at">nrows=</span> <span class="dv">10</span>,<span class="at">ncols =</span> <span class="dv">10</span>)</span></code></pre></div>
+<div class="figure">
+<img src="data:image/png;base64,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" alt="A nice example" width="70%" />
+<p class="caption">
+A nice example
+</p>
+</div>
+<p>It is also possible to display the solution path of the existing maze
+as below :
+<img src="data:image/png;base64,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x9cEly5dkn379ok5LC6W6/HHH5eGhoZYtiP79++XPXv2qO9n2rRpIg+pT2M9QbABZMJnxYoVYk6r1LxGRkbkxhtvlC+++EJaWlrUpjp79qwsWrRIXnrpJZkzZ47aPGZg89CZw/V2796tOo/PwefPn68eQBUVFZkfRGVlZapbM6evmgMQf537f6I915/G/En+9fJ/oV7BBpD55GPC58KFC6p2u3btknnz5kl/f7/qPENDQ5mQW7Zsmeo8ZvDjx4/L888/z8moCaVNj8wnE/NDSfMyz9r3338v//Zfz0lbW5vmVMGPze+Agm8RC0QgXgECKN7esjMEghcggIJvEQtEIF4BAije3rIzBIIXIICCbxELRCBeAQIo3t6yMwSCFyCAgm8RC0QgXgECKN7esjMEghcggIJvEQtEIF4BAije3rIzBIIXIICCbxELRCBeAQIo3t6yMwSCFyCAgm8RC0QgXgECKN7esjMEghcggIJvEQtEIF4BAije3rIzBIIXIICCbxELRCBeAQIo3t6yMwSCFyCAgm8RC0QgXgECKN7esjMEghcggIJvEQtEIF4BAije3rIzBIIXIICCbxELRCBegWDPBYuXPK6dmXPVfFxjx44Vc+Kr5nXo0CHN4Ysy9sDAQOacOO3JBwcHraYINoDMccmvvvqq1aaSFJWXl8vs2bNlzBjdD4PmBEwzT2VlZZLlWd27du1aaW9vt6pNUrR582ZZvnx5khLre6dPny5Hjhyxrh9t4eLFi6W6unq0t1vdZ541H8+cWZw54PONN96wWmeSItvvn2ADyJzV7uO89osXL2aOMB4eHk7infhec9qmOSr5ySefTFybtGDlypVJS6zu/+ijj+See+6Rd99916o+SZEJcO0TS816mpub1X9ImGfNPAtzh+9MQmB1rzl2/OWXX7aqTVL03nvviRxLUvG3e4MNoORboaIYAhMmTPDyaasYe4thzmuuuUaamprUtzJu3DirOXT/3WG1JIoQQKBUBAigUuk0+0QgQAECKMCmsCQESkWAACqVTrNPBAIUIIACbApLQqBUBAigUuk0+0QgQAECKMCmsCQESkWAACqVTrNPBAIUIIACbApLQqBUBAigUuk0+0QgQAECKMCmsCQESkWAACqVTrNPBAIUIIACbApLQqBUBAigUuk0+0QgQAECKMCmsCQESkWAACqVTrNPBAIU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" width="70%" style="display: block; margin: auto;" /></p>
+<p>Finally the package is compatible with Shiny.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a>RetakeExamF<span class="sc">::</span><span class="fu">myMazeShinyApp</span>() <span class="co"># shiny app experience </span></span></code></pre></div>
+</div>
+</div>
+<div id="additional-resources---annexe" class="section level2">
+<h2>Additional resources - (annexe)</h2>
+<p>You can find more information on DFS algorithm to build a maze here
+:</p>
+<p><a href="https://www.algosome.com/articles/maze-generation-depth-first.html" class="uri">https://www.algosome.com/articles/maze-generation-depth-first.html</a>
+<a href="https://www.geeksforgeeks.org/random-acyclic-maze-generator-with-given-entry-and-exit-point/" class="uri">https://www.geeksforgeeks.org/random-acyclic-maze-generator-with-given-entry-and-exit-point/</a>
+<a href="https://github.com/Vessy/Rmaze/tree/master" class="uri">https://github.com/Vessy/Rmaze/tree/master</a></p>
+<p>Please, to know more about the different functions included in igraph
+and ggplot2 packages, refer to the resources below :</p>
+<p><a href="https://r.igraph.org/" class="uri">https://r.igraph.org/</a>
+<a href="https://ggplot2.tidyverse.org/" class="uri">https://ggplot2.tidyverse.org/</a></p>
+</div>
+
+
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
