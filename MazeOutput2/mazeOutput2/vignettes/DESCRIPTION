@@ -1,0 +1,23 @@
+Package: RetakeExamF
+Type: Package
+Title: A package for generating mazes
+Version: 0.1.0
+Authors@R: person("Edward Tandia", email = "edward.tandia@unil.ch", role = c("aut", "cre"))
+Maintainer: Edward Tandia <edward.tandia@unil.ch>
+Description: A package for generating mazes using the depth-first search algorithm. It provides functions to create and visualize mazes, and offers integration with the igraph and ggplot2 packages. This package is designed to assist in maze generation and visualization tasks.
+Imports:
+  igraph (>= 1.0.1),
+  ggplot2 (>= 2.1.0),
+  shiny (>= 1.7.5)
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
+URL: https://github.com/Ed-sctt/Maze_repository
+BugReports: https://github.com/Ed-sctt/Maze_repository/issues
+RoxygenNote: 7.2.3
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
