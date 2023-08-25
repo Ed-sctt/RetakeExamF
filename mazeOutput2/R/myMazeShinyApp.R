@@ -23,8 +23,8 @@ myMazeShinyApp <- function(){
       shiny::column(4,
                     shiny::wellPanel(
                       shiny::h4("Define maze:"),
-                      shiny::sliderInput("width", "Maze width", 5, 100, 10, step = 1),
-                      shiny::sliderInput("height", "Maze height", 5, 100, 10, step = 1),
+                      shiny::sliderInput("width", "Maze width", 0, 100, 10, step = 1),
+                      shiny::sliderInput("height", "Maze height", 0, 100, 10, step = 1),
              
                       shiny::selectInput("method", "Select maze generation method",
                          c("Recursive backtracker" = "rbt",
