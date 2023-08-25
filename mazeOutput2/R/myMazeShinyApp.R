@@ -26,11 +26,6 @@ myMazeShinyApp <- function(){
                       shiny::sliderInput("width", "Maze width", 0, 100, 10, step = 1),
                       shiny::sliderInput("height", "Maze height", 0, 100, 10, step = 1),
              
-                      shiny::selectInput("method", "Select maze generation method",
-                         c("Recursive backtracker" = "rbt",
-                           "Kruskal's algorithm" = "ka",
-                           "Prim's algorithm" = "pa")),
-             
                       shiny::checkboxInput(inputId = "imperfect",
                            label = shiny::strong("Create imperfect maze"),
                            value = FALSE),
@@ -66,10 +61,7 @@ myMazeShinyApp <- function(){
     
     g <- RetakeExamF::myGraph(nrows = width, ncols = height) #old makeGraph()
     
-    myMaze <- switch(method,
-                     "rbt" = RetakeExamF::dfs_method(g))#old (g, inShiny =T)
-                     #"ka" = makeMaze_kruskal(g, inShiny=TRUE),
-                     #"pa" = makeMaze_prim(g, inShiny=TRUE))
+    myMaze <- RetakeExamF::dfs_method(g))
     
     #if (input$imperfect) {
      # myMaze <- makeImperfect(myMaze, inShiny=TRUE)
