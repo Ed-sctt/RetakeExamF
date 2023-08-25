@@ -26,10 +26,6 @@ myMazeShinyApp <- function(){
                       shiny::sliderInput("width", "Maze width", 0, 100, 10, step = 1),
                       shiny::sliderInput("height", "Maze height", 0, 100, 10, step = 1),
              
-                      shiny::checkboxInput(inputId = "imperfect",
-                           label = shiny::strong("Create imperfect maze"),
-                           value = FALSE),
-             
                       shiny::actionButton("gmButton", "Generate maze"),
                       shiny::actionButton('Solver','Solve maze')
            ))),
@@ -61,13 +57,7 @@ myMazeShinyApp <- function(){
     
     g <- RetakeExamF::myGraph(nrows = width, ncols = height) #old makeGraph()
     
-    myMaze <- RetakeExamF::dfs_method(g))
-    
-    #if (input$imperfect) {
-     # myMaze <- makeImperfect(myMaze, inShiny=TRUE)
-    #}
-    
-    #myMaze
+    myMaze <- RetakeExamF::dfs_method(g)
     
   })
   
@@ -94,3 +84,5 @@ myMazeShinyApp <- function(){
   myapp <- shiny::shinyApp(ui,server)
   return(myapp)
 }
+
+myMazeShinyApp()  
