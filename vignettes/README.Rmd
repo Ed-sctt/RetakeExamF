@@ -1,28 +1,34 @@
+---
+title: "Maze App"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Maze APP}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
 
-# RetakeExamF package
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
 
-<!-- badges: start -->
-<!-- badges: end -->
-
-The goal of RetakeExamF is to allow users to build mazes based on DFS algorithm. They can also use a solver method to see the solution of the generated maze.
+This is the README.rmd where you can find all the necessary documentation and resources related to package.
 
 ## Installation
 
-You can install the development version of RetakeExamF from [GitHub](https://github.com/) with:
 
-``` r
-# install.packages("RetakeExamF")
-devtools::install_github("user/repo") 
-
-# call the package
-library(RetakeExamF)
+```{r setup}
+#devtools::install_github("ptds2022/groupf/RetakeExamF") # to edit
+library(RetakeExamF)  #call the package
 ```
-## Description 
+
+## Description
 
 RetakeExamF is a dynamic R package that empowers users to craft captivating mazes using the Depth-First Search (DFS) algorithm. Seamlessly merging educational insights and creative possibilities, this package provides a user-friendly platform to generate mazes of varying complexities.
 
 By integrating the "igraph" package, the creation of networks composed of edges and vertices, improve the flexibility and customization of maze designs. "ggplot2" package further elevates the maze-building experience by enabling users to visualize their mazes with aesthetically pleasing layouts.
-
 
 ## Steps to follow to get a maze
 
@@ -37,31 +43,21 @@ Plot your name_graph.
 
 You can have a glimpse of the final output that the package offers :
 
+```{r, include = TRUE, echo = TRUE, out.width= '70%', fig.cap = 'A nice example'}
 
-## Example
-
-This is a basic example which shows you how to solve a common problem:
-
-```r
 Example_maze <- RetakeExamF::myGraph (nrows = 10,ncols = 10) 
 Example_maze <- RetakeExamF::dfs_method (GraphMade = Example_maze)
 RetakeExamF::plotmyMaze(Example_maze,nrows= 10,ncols = 10)
-
-## To plot a maze of size 10x10
 ```
-It is also possible to display the solution path of the existing maze as below :
-
-```r
+It is also possible to display the solution path of the existing maze as below : 
+```{r, echo = FALSE, out.width = '70%',fig.align='center'}
 RetakeExamF::solverGraph(Example_maze,nrows= 10,ncols = 10)
-## Visualization of the solution of the exiting maze
-
 ```
+
 
 Finally the package is compatible with Shiny. 
-```r
-RetakeExamF::myMazeShinyApp() 
-## shiny app experience 
-
+```{r, echo = TRUE, eval = FALSE}
+RetakeExamF::myMazeShinyApp() # shiny app experience 
 ```
 
 ## Additional resources - (annexe)
@@ -77,6 +73,3 @@ Please, to know more about the different functions included in igraph and ggplot
 
 https://r.igraph.org/ </br> 
 https://ggplot2.tidyverse.org/
-
-
-
