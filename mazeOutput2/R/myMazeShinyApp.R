@@ -28,15 +28,14 @@ myMazeShinyApp <- function(){
              
                       shiny::actionButton("gmButton", "Generate maze"),
                       shiny::actionButton('Solver','Solve maze')
-           ))),
-    shiny::fluidRow(
-      shiny::column(6,
+           )),
+      shiny::column(4,
                     shiny::mainPanel(
                       shiny::wellPanel(
                         shiny::h4("Maze:"),
                         shiny::plotOutput("plotMaze")
              ))),
-      shiny::column(6,
+      shiny::column(4,
                     shiny:: mainPanel(
                       shiny::wellPanel(
                         shiny::h4('Solver:'),
