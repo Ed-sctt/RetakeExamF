@@ -1,0 +1,105 @@
+---
+title: "MazeApp - Presentation"
+author: "Joost Dijkstra Edward Tandia"
+date: "2023-08-26"
+output: ioslides_presentation
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+devtools::install_github('Ed-sctt/RetakeExamF') # to edit ptds2022
+library(RetakeExamF)
+```
+
+## Agenda
+
+-   Project presentation & objectives
+
+-   Package RetakeExamF
+
+    -   Description
+    -   Functions
+    -   Maze App
+
+-   Limitations & future work
+
+## Project presentation (1)
+
+-   The project is focused on building mazes. Exploring different algorithms related to the maze conception and conciliate these with R code.
+
+```{r echo = TRUE}
+
+```
+
+## Proejct objectives (2)
+
+-   The goal of this project is to develop an R package that generates mazes using various maze generation algorithms.
+
+-   Create an interactive app where users can create their own maze and visualize the solution.
+
+## Package RetakeExamF
+
+### Description
+
+RetakeExamF is a dynamic R package that empowers users to craft captivating mazes using the Depth-First Search (DFS) algorithm. The package provides a user-friendly platform to generate mazes of varying complexities. 
+
+```{r, echo = FALSE, out.height='25%', out.width='25%', fig.align='center'}
+magick::image_read('img/package.svg')
+```
+
+
+## Joost function
+To be continued...
+
+## Functions - myGraph() - plotmyMaze()
+
+Example of the functions usage :
+
+```{r, echo = TRUE, cache =TRUE, fig.height=3, fig.width=3, fig.align='center'}
+# myGraph() 
+Example_maze <- RetakeExamF::myGraph (nrows = 5,ncols = 9) 
+#plotmyMaze()
+RetakeExamF::plotmyMaze(Example_maze,nrows= 5,ncols = 9)
+```
+
+## Functions - dfs_method()
+
+```{r cars, echo = TRUE, cache=TRUE,fig.height=3, fig.width=3, fig.align='center'}
+#dfs_method()
+Example_maze<-RetakeExamF::dfs_method (GraphMade = Example_maze)
+
+RetakeExamF::plotmyMaze(Example_maze,nrows= 5,ncols = 9)
+```
+
+## Functions - solverGraph()
+
+```{r echo = TRUE, cache=TRUE,fig.height=3, fig.width=3, fig.align='center'}
+# solver visualization
+RetakeExamF::solverGraph(Example_maze,nrows= 5,ncols = 9)
+```
+
+## Functions - mymazeApp()
+
+Example function that runs the app on shiny :
+```{r, eval= FALSE}
+RetakeExamF::myMazeShinyApp() # shiny app experience 
+```
+
+```{r, echo = FALSE, out.height='90%', out.width='90%', fig.align='center'}
+magick::image_read('img/MazeApp.png')
+```
+
+## Maze App
+
+Now, let's run the app ! 
+
+## Limitations & future work
+### Limtations 
+  - DFS algorithm only, no other methods implemented
+  - Lack of user features - (i.e. walk around the maze )
+  - Lack of creativity (try out different approaches)
+  - Bottleneck issue when increasing the size of the maze
+  
+### Future work
+  - More algorithm variety to build mazes
+  - More interactivity --> Create a game ? 
