@@ -1,9 +1,11 @@
 library(ggplot2)
 
 # Initialize maze dimensions with walls
-width <- 31
-height <- 31
-maze <- matrix(1, nrow = height, ncol = width)
+width <- 30
+height <- 5
+
+# Add +1 to dimensions if even to ensure an outer wall
+maze <- matrix(1, nrow = height + (height %% 2 == 0), ncol = width + (width %% 2 == 0))
 
 # Initialize stack for backtracking
 stack <- list(start = c(2, 2))
@@ -63,7 +65,7 @@ while (length(stack) > 0) {
 }
 
 # Visualization
-maze_df <- expand.grid(x = 1:width, y = 1:height)
+maze_df <- expand.grid(x = 1:ncol(maze), y = 1:nrow(maze))
 maze_df$cell_value <- as.vector(t(maze))
 
 # Add a column for cell color
@@ -72,7 +74,7 @@ maze_df$cell_color[maze_df$cell_value == 1] <- "black"
 
 # Mark the start cell green and the exit cell red
 maze_df$cell_color[maze_df$x == 2 & maze_df$y == 2] <- "green"
-maze_df$cell_color[maze_df$x == 30 & maze_df$y == 30] <- "red"
+maze_df$cell_color[maze_df$x == ncol(maze) - 1 & maze_df$y == nrow(maze) - 1] <- "red"
 
 # Generate the plot
 ggplot(maze_df, aes(x = x, y = y)) +
