@@ -1,8 +1,8 @@
 library(ggplot2)
 
 # Initialize maze dimensions with walls
-width <- 30
-height <- 5
+width <- 28
+height <- 6
 
 # Add +1 to dimensions if even to ensure an outer wall
 maze <- matrix(1, nrow = height + (height %% 2 == 0), ncol = width + (width %% 2 == 0))
