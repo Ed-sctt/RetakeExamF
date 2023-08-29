@@ -13,7 +13,7 @@
 #' @examples
 #'Example_maze <- RetakeExamF::myGraph (nrows = 5,ncols = 9) 
 #'Example_maze <- RetakeExamF::dfs_method (GraphMade = Example_maze)
-#'RetakeExamF::solverGraph(Example_maze,nrows= 5,ncols = 5)
+#'RetakeExamF::plotmyMaze(Example_maze,nrows= 5,ncols = 5)
 
 # Definied global funcitons, variables
 utils::globalVariables(c("df", "x1", "x2",'y1','y2'))

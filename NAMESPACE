@@ -2,6 +2,7 @@
 
 export(dfs_method)
 export(myGraph)
-export(myMazeShinyApp)
+export(myMazeShinyApp3)
 export(plotmyMaze)
+export(rb_maze)
 export(solverGraph)
