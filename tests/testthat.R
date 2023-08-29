@@ -9,4 +9,4 @@
 library(testthat)
 library(RetakeExamF)
 
-test_check("RetakeExamF")
+test_check('RetakeExamF')

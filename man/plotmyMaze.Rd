@@ -23,7 +23,7 @@ creates a plot of the existing maze with ggplot2 package.
 \examples{
 Example_maze <- RetakeExamF::myGraph (nrows = 5,ncols = 9) 
 Example_maze <- RetakeExamF::dfs_method (GraphMade = Example_maze)
-RetakeExamF::solverGraph(Example_maze,nrows= 5,ncols = 5)
+RetakeExamF::plotmyMaze(Example_maze,nrows= 5,ncols = 5)
 }
 \author{
 Joost and Edward
