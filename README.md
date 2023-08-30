@@ -60,7 +60,7 @@ RetakeExamF::solverGraph(Example_maze,nrows= 10,ncols = 10)
 
 Finally the package is compatible with Shiny. 
 ```r
-RetakeExamF::myMazeShinyApp() 
+RetakeExamF::myMazeShinyApp3() 
 ## shiny app experience 
 
 ```
