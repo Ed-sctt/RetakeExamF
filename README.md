@@ -20,7 +20,7 @@ library(RetakeExamF)
 ```
 ## Description 
 
-RetakeExamF is a dynamic R package that empowers users to craft captivating mazes using the Depth-First Search (DFS) algorithm. Seamlessly merging educational insights and creative possibilities, this package provides a user-friendly platform to generate mazes of varying complexities.
+RetakeExamF is a dynamic R package that empowers users to craft captivating mazes using the Depth-First Search (DFS) and Recusrive backtracking algorithms. Seamlessly merging educational insights and creative possibilities, this package provides a user-friendly platform to generate mazes of varying complexities.
 
 By integrating the "igraph" package, the creation of networks composed of edges and vertices, improve the flexibility and customization of maze designs. "ggplot2" package further elevates the maze-building experience by enabling users to visualize their mazes with aesthetically pleasing layouts.
 
